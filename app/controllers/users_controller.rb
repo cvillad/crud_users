@@ -1,8 +1,12 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
     def index
         @users = User.all
         # flash[:notice] = "Init successfully"
+    end
+
+    def show
+        @user = User.find(params[:id])
     end
 
     def new
@@ -13,7 +17,7 @@ class UserController < ApplicationController
         @user = User.new(user_params)
         
         if @user.save
-            redirect_to root_path, notice: "Successfully created account"
+            redirect_to root_path
         else
             render :new
         end
@@ -37,9 +41,8 @@ class UserController < ApplicationController
 
     private 
 
-
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :description, :social_media, :password)
+        params.require(:user).permit(:first_name, :last_name, :email, :description)
     end
 
 end

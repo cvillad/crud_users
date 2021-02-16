@@ -1,0 +1,21 @@
+<%= form_with model: [@user, @social_network] do |form| %>
+    <% if @social_network.errors.any? %>
+        <div class="alert alert-danger">
+            <% @social_network.errors.full_messages.each do |message| %>
+            <div> <%= message %> </div>
+            <% end %>
+        </div>
+    <% end %>
+    <h5> <%= @user.first_name + " "+ @user.last_name %> </h5>
+    <div class="mb-3">
+        <%= form.label :name %>
+        <%= form.select :name, options_for_select(["Facebook", "Twitter", "Instagram", "Linkedln"]), {}, {class: "form-select"} %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :link %>
+        <%= form.text_field :link, class: "form-control", placeholder: "twitter.com/username", value: @social_network.link %>
+    </div>
+    <div class="mb-3">
+        <%= form.submit class: "btn btn-dark" %>
+    </div>
+<% end %>

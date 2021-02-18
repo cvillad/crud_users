@@ -6,41 +6,9 @@
         <div class="card-body">
             <p> <%= "Email: #{@user.email}"%> <p>
             <p class="card-text"><%= "Description: #{@user.description}" %></p>
-            <div class="d-flex align-items-center mb-3">
-                <p style="font-weight: bold; margin: auto auto 5px 0px"> Social networks </p>
-                <%= button_to new_user_social_network_path(@user), method: :get, class: "btn btn-success btn-sm" do %>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                <% end %>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Network</th>
-                        <th scope="col">Link</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @user.social_networks.each do |social_network| %>
-                        <tr>
-                        <td>
-                            <%=social_network.name%>
-                        </td>
-                        <td>
-                            <%= link_to social_network.link, social_network.link%>
-                        </td>
-                            <td class="d-flex justify-content-evenly">
-                                <%= button_to edit_user_social_network_path(@user, social_network), method: :get, class:"btn btn-sm btn-outline-warning" do%>
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                <% end %>
-                                <%= button_to user_social_network_path(@user, social_network), method: :delete, class:"btn btn-sm btn-outline-danger", data: {confirm: "Are you sure?"} do%>
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                <% end %>
-                            </td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
+            
+            <%= render partial: "users/social_networks" %>
+            <%= yield %>
         </div>
         <div class="card-footer d-flex justify-content-end">
             <%= button_to edit_user_path(@user), method: :get, class: "btn btn-warning" do %>

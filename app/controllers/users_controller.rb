@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
         @users = User.all
@@ -6,7 +7,6 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
     end
 
     def new
@@ -25,11 +25,9 @@ class UsersController < ApplicationController
     end
 
     def edit
-        @user = User.find(params[:id])
     end
 
     def update
-        @user = User.find(params[:id])
         if @user.update(user_params)
             flash[:notice] = "User was updated succesfully"
             redirect_to root_path
@@ -39,13 +37,9 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        @user = User.find(params[:id])
-        if @user.destroy
-            flash[:notice] = "User was deleted succesfully"
-            redirect_to root_path
-        else
-        
-        end
+        @user.destroy
+        flash[:notice] = "User was deleted succesfully"
+        redirect_to root_path
     end
 
     private 
@@ -54,4 +48,7 @@ class UsersController < ApplicationController
         params.require(:user).permit(:first_name, :last_name, :email, :description)
     end
 
+    def set_user
+        @user = User.find(params[:id])
+    end
 end

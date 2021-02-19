@@ -1,1 +1,5 @@
-<%= flash[:notice].inspect %>
+<% if !flash[:notice].nil? %>
+    <div class="alert alert-success">
+        <%= flash[:notice] %>
+    </div>
+<% end %>

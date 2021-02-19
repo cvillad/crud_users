@@ -6,6 +6,8 @@
 </div>
 <table class="table table-borderless">
     <thead>
+        <th></th>
+        <th colspan="2"></th>
     </thead>
     <tbody>
         <% @user.social_networks.each do |social_network| %>
@@ -13,10 +15,12 @@
                 <td>
                     <%= link_to social_network.name, social_network.link%>
                 </td>
-                <td class="d-flex justify-content-end">
+                <td class="action-column">
                     <%= link_to edit_user_social_network_path(@user, social_network), method: :get, class:"btn btn-sm btn-outline-warning" do%>
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <% end %>
+                </td>
+                <td class="action-column">
                     <%= link_to user_social_network_path(@user, social_network), method: :delete, style:"margin-left:5px", class:"btn btn-sm btn-outline-danger ml-3", data: {confirm: "Are you sure?"} do%>
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     <% end %>

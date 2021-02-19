@@ -8,19 +8,19 @@
     <% end %>
     <div class="mb-3">
         <%= form.label :first_name %>
-        <%= form.text_field :first_name, class: "form-control", placeholder: "first name", value: @user.first_name %>
+        <%= form.text_field :first_name, class: "form-control", placeholder: "first name" %>
     </div>
     <div class="mb-3">
         <%= form.label :last_name %>
-        <%= form.text_field :last_name, class: "form-control", placeholder: "last name", value: @user.last_name %>
+        <%= form.text_field :last_name, class: "form-control", placeholder: "last name" %>
     </div>
     <div class="mb-3">
         <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control", placeholder: "someone@example.com", value: @user.email %>
+        <%= form.text_field :email, class: "form-control", placeholder: "someone@example.com" %>
     </div>
     <div class="mb-3">
         <%= form.label :description %>
-        <%= form.text_field :description, class: "form-control", placeholder: "description", value: @user.description %>
+        <%= form.text_field :description, class: "form-control", placeholder: "description" %>
     </div>
     <% unless @user.id.nil? %>
         <%= render partial: "users/social_networks" %>

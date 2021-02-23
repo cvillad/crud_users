@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        
         if @user.save
             flash[:notice] = "User was created successfully"
             render :show
@@ -32,6 +31,7 @@ class UsersController < ApplicationController
             flash[:notice] = "User was updated succesfully"
             redirect_to root_path
         else
+            @user
             render :edit
         end
     end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :description)
+        params.require(:user).permit(:first_name, :last_name, :email, :description, :image)
     end
 
     def set_user

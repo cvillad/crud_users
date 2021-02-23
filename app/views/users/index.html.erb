@@ -14,20 +14,20 @@
         </thead>
         <% @users.each do |user| %>
             <tr>
-                <td> <%= user.first_name + " " + user.last_name %> </td>
-                <td> <%= user.email %> </td>
-                <td> <%= user.description %> </td>
-                <td class="action-column">
+                <td class="align-middle"> <%= image_tag user.image.variant(:thumb), style: "width: 50px; height: 50px" if user.image.attached? %>  <%= user.first_name + " " + user.last_name %> </td>
+                <td class="align-middle"> <%= user.email %> </td>
+                <td class="align-middle"> <%= user.description %> </td>
+                <td class="action-column align-middle">
                     <%= link_to user, class: "btn btn-sm btn-dark" do %>
                         <i class="fa fa-id-card" aria-hidden="true"></i>
                     <% end %>
                 </td>
-                <td class="action-column">
+                <td class="action-column align-middle">
                     <%= link_to edit_user_path(user), class: "btn btn-warning btn-sm" do %>
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <% end %>
                 </td>
-                <td class="action-column">
+                <td class="action-column align-middle">
                     <%= link_to user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     <% end %>

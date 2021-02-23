@@ -14,17 +14,21 @@
         <%= form.label :last_name %>
         <%= form.text_field :last_name, class: "form-control", placeholder: "last name" %>
     </div>
-    <div class="mb-3">
+    <div class="form-group mb-3">
         <%= form.label :email %>
         <%= form.text_field :email, class: "form-control", placeholder: "someone@example.com" %>
     </div>
-    <div class="mb-3">
+    <div class="form-group mb-3">
         <%= form.label :description %>
         <%= form.text_field :description, class: "form-control", placeholder: "description" %>
     </div>
+    <div class="form-group mb-3">
+        <%= form.label :image %> <br/>
+        <%= image_tag @user.image.variant(:thumb), class: "mb-1" if @user.errors[:image].empty? && @user.image.attached? %>
+        <%= form.file_field :image, accept: "image/jpeg, image/png",class: "form-control" %>
+    </div>
     <% unless @user.id.nil? %>
         <%= render partial: "users/social_networks" %>
-        <%= yield %>
     <% end %> 
     <div class="mb-3">
         <%= form.submit class: "btn btn-dark" %>

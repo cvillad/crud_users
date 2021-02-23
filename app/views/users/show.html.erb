@@ -4,11 +4,13 @@
             <h4 class="card-title"> <%= "#{@user.first_name} #{@user.last_name}" %> </h4>
         </div>
         <div class="card-body">
+            <%= link_to url_for(@user.image), target: :_blank do %>
+                <%= image_tag @user.image.variant(:profile), style: "width: 100px; height: 100px", class: "mb-4" if @user.image.attached? %>
+            <% end %>
             <p> <%= "Email: #{@user.email}"%> <p>
             <p class="card-text"><%= "Description: #{@user.description}" %></p>
             
-            <%= render partial: "users/social_networks" %>
-            <%= yield %>
+            <%= render "social_networks" %>
         </div>
         <div class="card-footer d-flex justify-content-end">
             <%= button_to edit_user_path(@user), method: :get, class: "btn btn-warning" do %>

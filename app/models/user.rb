@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_many :social_networks, dependent: :destroy
+    accepts_nested_attributes_for :social_networks, allow_destroy: true
     has_one_attached :image, dependent: :destroy  do |attachable|
         attachable.variant :thumb, resize: "50x50"
         attachable.variant :profile, resize: "150x150"

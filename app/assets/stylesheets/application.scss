@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap/scss/bootstrap";
+
+.form{
+    width: 550px;
+}
 
 .action-column{
     width: 1px;

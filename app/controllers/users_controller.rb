@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
+        @user.social_networks.build
         if @user.save
             flash[:notice] = "User was created successfully"
             render :show
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
     end
 
     def edit
+        @user.social_networks.build
     end
 
     def update
@@ -51,7 +53,8 @@ class UsersController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :description, :image)
+        params.require(:user).permit(:first_name, :last_name, :email, :description, :image, 
+                                    social_networks_attributes: [:id, :name, :link, :_destroy])
     end
 
     def set_user

@@ -1,4 +1,4 @@
-<%= form_with model: @user, class: "w-50" do |form| %>
+<%= simple_form_for @user, html: {class: "form"} do |f| %>
     <% if @user.errors.any? %>
         <div class="alert alert-danger">
             <% @user.errors.full_messages.each do |message| %>
@@ -7,23 +7,19 @@
         </div>
     <% end %>
     <div class="mb-3">
-        <%= form.label :first_name %>
-        <%= form.text_field :first_name, class: "form-control", placeholder: "first name" %>
+        <%= f.input :first_name, input_html: {class: "form-control"}, placeholder: "first name" %>
     </div>
     <div class="mb-3">
-        <%= form.label :last_name %>
-        <%= form.text_field :last_name, class: "form-control", placeholder: "last name" %>
+        <%= f.input :last_name, input_html: {class: "form-control"}, placeholder: "last name" %>
     </div>
     <div class="form-group mb-3">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control", placeholder: "someone@example.com" %>
+        <%= f.input :email, input_html: {class: "form-control"}, placeholder: "someone@example.com" %>
     </div>
     <div class="form-group mb-3">
-        <%= form.label :description %>
-        <%= form.text_field :description, class: "form-control", placeholder: "description" %>
+        <%= f.input :description, input_html: {class: "form-control"}, placeholder: "description" %>
     </div>
-    <div class="form-group mb-3">
-        <%= form.label :image %>
+    <%= f.label :image %>
+    <div class="custom-file mb-3">
         <% if @user.errors[:image].empty? && @user.image.attached? %>
             <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -31,12 +27,28 @@
             <br/>
             <%= image_tag @user.image.variant(:profile), class: "mt-1 mb-2" %>
         <% end %>
-        <%= form.file_field :image, accept: "image/jpeg, image/png",class: "form-control" %>
+        <%= f.input :image, as: :file, input_html: {class: "custom-file-input", id: "file", accept: "image/jpeg, image/png"} %>
+        <label class="custom-file-label" for="file">Choose file</label>
     </div>
-    <% unless @user.id.nil? %>
-        <%= render partial: "users/social_networks" %>
-    <% end %> 
+    <div class="d-flex align-items-center mb-3">
+        <p style="font-weight: bold; margin: auto auto 5px 0px"> Social networks </p>
+        <%= link_to_add_association f, :social_networks, force_non_association_create: true, class: "btn btn-sm btn-outline-success", data: {
+            association_insertion_node: ".social-networks",
+            association_insertion_method: :append} do %>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        <% end %>
+    </div>
+    <div class="form-group mb-3">
+        <table class="table table-borderless">
+            <tbody class="social-networks">
+                <%= f.simple_fields_for :social_networks do |builder| %>
+                    <%= render "social_network_fields", f: builder %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
     <div class="mb-3">
-        <%= form.submit class: "btn btn-dark" %>
+        <%= f.submit class: "btn btn-dark" %>
     </div>
 <% end %>

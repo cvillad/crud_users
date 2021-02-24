@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :social_networks
+    delete "image", to: "users#destroy_image"
   end
   
 end

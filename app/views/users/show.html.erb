@@ -4,13 +4,29 @@
             <h4 class="card-title"> <%= "#{@user.first_name} #{@user.last_name}" %> </h4>
         </div>
         <div class="card-body">
-            <%= link_to url_for(@user.image), target: :_blank do %>
-                <%= image_tag @user.image.variant(:profile), style: "width: 100px; height: 100px", class: "mb-4" if @user.image.attached? %>
+            <% if @user.image.attached? %>
+                <%= link_to url_for(@user.image), target: :_blank do %>
+                    <%= image_tag @user.image.variant(:profile), class: "mb-4" if @user.image.attached? %>
+                <% end %>
             <% end %>
             <p> <%= "Email: #{@user.email}"%> <p>
             <p class="card-text"><%= "Description: #{@user.description}" %></p>
-            
-            <%= render "social_networks" %>
+            <div class="d-flex align-items-center mb-3">
+                <% @user.social_networks.each do |social_network| %>
+                    <%= link_to social_network.link, class: "mx-1", target: :_blank do %>
+                        <% case social_network.name %>
+                            <% when "Facebook" %>
+                                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+                            <% when "Twitter" %>
+                                <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                            <% when "Instagram" %>
+                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                            <% when "Linkedin" %>
+                                <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
         </div>
         <div class="card-footer d-flex justify-content-end">
             <%= button_to edit_user_path(@user), method: :get, class: "btn btn-warning" do %>

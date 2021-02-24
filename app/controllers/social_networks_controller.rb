@@ -11,13 +11,13 @@ class SocialNetworksController < ApplicationController
 
     def update
         @social_network.update(social_network_params) 
-        redirect_to user_path params[:user_id]
+        redirect_to edit_user_path @user
     end
 
     def create
         @social_network = @user.social_networks.new(social_network_params)
         if @social_network.save
-            redirect_to user_path params[:user_id]
+            redirect_to edit_user_path @user
         else
             render :new
         end
@@ -25,7 +25,7 @@ class SocialNetworksController < ApplicationController
 
     def destroy
         @social_network.destroy
-        redirect_to user_path params[:user_id]
+        redirect_to edit_user_path params[:user_id]
     end
 
     private 

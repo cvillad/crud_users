@@ -42,6 +42,12 @@ class UsersController < ApplicationController
         redirect_to root_path
     end
 
+    def destroy_image
+        @user = User.find(params[:user_id])
+        @user.image.purge
+        redirect_to edit_user_path @user
+    end
+
     private 
 
     def user_params

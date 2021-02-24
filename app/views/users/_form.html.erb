@@ -23,8 +23,14 @@
         <%= form.text_field :description, class: "form-control", placeholder: "description" %>
     </div>
     <div class="form-group mb-3">
-        <%= form.label :image %> <br/>
-        <%= image_tag @user.image.variant(:thumb), class: "mb-1" if @user.errors[:image].empty? && @user.image.attached? %>
+        <%= form.label :image %>
+        <% if @user.errors[:image].empty? && @user.image.attached? %>
+            <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <% end %>
+            <br/>
+            <%= image_tag @user.image.variant(:profile), class: "mt-1 mb-2" %>
+        <% end %>
         <%= form.file_field :image, accept: "image/jpeg, image/png",class: "form-control" %>
     </div>
     <% unless @user.id.nil? %>

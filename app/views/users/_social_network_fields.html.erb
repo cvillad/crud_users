@@ -1,14 +1,14 @@
 <tr class="nested-fields">
     
     <td> 
-        <%= f.input :name, as: :select, collection: ["Facebook", "Twitter", "Instagram", "Linkedin"],
-        selected: f.object.name, label: false %> 
+        <%= form.input :name, as: :select, collection: ["Facebook", "Twitter", "Instagram", "Linkedin"],
+        selected: form.object.name, label: false %> 
     </td>
     <td> 
-        <%= f.input :link, label: false %> 
+        <%= form.input :link, label: false %> 
     </td>
     <td>
-        <%= link_to_remove_association f, class: "btn btn-outline-danger btn-sm" do %>
+        <%= link_to_remove_association form, class: "btn btn-outline-danger btn-sm" do %>
             <i class="fa fa-trash-o" aria-hidden="true"></i>
         <% end %>
     </td>

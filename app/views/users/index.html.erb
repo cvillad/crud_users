@@ -17,7 +17,7 @@
         <tr>
           <td class="align-middle"> 
             <%= link_to user, style: "text-decoration: none" do %>
-              <%= image_tag user.image.attached? ? user.image.variant(:thumb) : "default.png", width: 50, height: 50 %>
+              <%= image_tag user.image.attached? ? user.thumb_img : "default.png", width: 50, height: 50, class: "rounded-lg" %>
             <% end %>  
             <%= user.first_name + " " + user.last_name %> 
           </td>

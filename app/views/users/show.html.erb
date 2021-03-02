@@ -6,10 +6,10 @@
     <div class="card-body">
       <% if @user.image.attached? %>
         <%= link_to url_for(@user.image), target: :_blank do %>
-          <%= image_tag @user.image.variant(:profile), class: "mb-4" %>
+          <%= image_tag @user.profile_img, class: "mb-4 rounded-lg" %>
         <% end %>
       <% else %>
-        <%= image_tag "default", width: 150, height: 150, class: "mb-4" %>
+        <%= image_tag "default", width: 150, height: 150, class: "mb-4 rounded-lg" %>
       <% end %>
       <p> <%= "Email: #{@user.email}"%> <p>
       <p class="card-text"><%= "Description: #{@user.description}" %></p>

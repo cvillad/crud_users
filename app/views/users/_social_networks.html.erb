@@ -1,0 +1,16 @@
+<div class="d-flex align-items-center">
+  <% social_networks.each do |social_network| %>
+    <%= link_to social_network.link, class: "mx-1", target: :_blank do %>
+      <% case social_network.name %>
+        <% when "Facebook" %>
+          <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+        <% when "Twitter" %>
+          <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+        <% when "Instagram" %>
+          <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+        <% when "Linkedin" %>
+          <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -6,27 +6,16 @@
     <div class="card-body">
       <% if @user.image.attached? %>
         <%= link_to url_for(@user.image), target: :_blank do %>
-          <%= image_tag @user.image.variant(:profile), class: "mb-4" if @user.image.attached? %>
+          <%= image_tag @user.image.variant(:profile), class: "mb-4" %>
         <% end %>
+      <% else %>
+        <%= image_tag "default", width: 150, height: 150, class: "mb-4" %>
       <% end %>
       <p> <%= "Email: #{@user.email}"%> <p>
       <p class="card-text"><%= "Description: #{@user.description}" %></p>
-      <div class="d-flex align-items-center mb-3">
-        <% @user.social_networks.each do |social_network| %>
-          <%= link_to social_network.link, class: "mx-1", target: :_blank do %>
-            <% case social_network.name %>
-              <% when "Facebook" %>
-                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
-              <% when "Twitter" %>
-                <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
-              <% when "Instagram" %>
-                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
-              <% when "Linkedin" %>
-                <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
+
+      <%= render "social_networks", social_networks: @user.social_networks %>
+
       <% if current_user==@user %>
         <div class="mt-3 d-flex justify-content-end">
           <%= link_to edit_user_registration_path, method: :get, class: "btn btn-warning" do %>

@@ -34,6 +34,7 @@ gem 'active_storage_validations'
 # Optional, to use :dimension validator or :aspect_ratio validator
 gem 'mini_magick', '>= 4.9.5'
 
+gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

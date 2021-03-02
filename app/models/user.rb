@@ -10,9 +10,8 @@ class User < ApplicationRecord
       attachable.variant :profile, resize: "150x150"
   end
   validates :image, content_type: ["image/png", "image/jpg", "image/jpeg"]
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :username, presence: true
-  #validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP}
+  validates :first_name, presence: true, length: { maximum: 25 }
+  validates :last_name, presence: true, length: { maximum: 25 }
+  validates :username, presence: true, uniqueness: true
   validates :description, presence: true
 end

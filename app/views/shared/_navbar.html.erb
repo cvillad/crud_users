@@ -2,7 +2,7 @@
     <%= link_to "User management", root_path, class: "navbar-brand" %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <% if user_signed_in? %>
@@ -12,7 +12,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="accountDropdown">
               <%= link_to "Profile", current_user, class: "dropdown-item" %>
-              <%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Edit profile", edit_user_registration_path(current_user), class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", method: :delete %>
             </div>
           </li>

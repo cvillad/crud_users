@@ -1,40 +1,41 @@
 
 <div class="container"> 
-    <div class="d-flex justify-content-center align-items-center mt-3">
-        <h1>Users</h1>
-    </div>
-    <table class = "table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Description</th>
-                <th scope="col"colspan="3" > Actions </th>
-            </tr>
-        </thead>
-        <% @users.each do |user| %>
-            <tr>
-                <td class="align-middle"> <%= image_tag user.image.variant(:thumb), style: "width: 50px; height: 50px" if user.image.attached? %>  <%= user.first_name + " " + user.last_name %> </td>
-                <td class="align-middle"> <%= user.email %> </td>
-                <td class="align-middle"> <%= user.description %> </td>
-                <td class="action-column align-middle">
-                    <%= link_to user, class: "btn btn-sm btn-dark" do %>
-                        <i class="fa fa-id-card" aria-hidden="true"></i>
-                    <% end %>
-                </td>
-                <td class="action-column align-middle">
-                    <%= link_to edit_user_path(user), class: "btn btn-warning btn-sm" do %>
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <% end %>
-                </td>
-                <td class="action-column align-middle">
-                    <%= link_to user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    <% end %>
-                </td>
-            </tr>
-        <% end %> 
-    </table>
-    <%= button_to "Create", new_user_path, method: :get, class: "btn btn-success" %>
+  <div class="d-flex justify-content-center align-items-center mt-3">
+    <h1>Users</h1>
+  </div>
+  <table class = "table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Description</th>
+            <th scope="col"colspan="3" > Actions </th>
+        </tr>
+    </thead>
+    <% @users.each do |user| %>
+      <tr>
+        <td class="align-middle"> <%= image_tag user.image.variant(:thumb), style: "width: 50px; height: 50px" if user.image.attached? %>  <%= user.first_name + " " + user.last_name %> </td>
+        <td class="align-middle"> <%= user.email %> </td>
+        <td class="align-middle"> <%= user.description %> </td>
+        <td class="action-column align-middle">
+          <%= link_to user, class: "btn btn-sm btn-dark" do %>
+            <i class="fa fa-id-card" aria-hidden="true"></i>
+          <% end %>
+        </td>
+        <% if current_user== user %>
+          <td class="action-column align-middle">
+            <%= link_to edit_user_registration_path(user), class: "btn btn-warning btn-sm" do %>
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td class="action-column align-middle">
+            <%= link_to user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %> 
+  </table>
 </div>
 

@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-7">
+      <%= simple_form_for(resource, as: resource_name, url: user_registration_path, 
+                          method: resource.new_record? ? :post : :put) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :first_name, 
+                      required: true,
+                      autofocus: true %>
+          <%= f.input :last_name, 
+                      required: true %>
+          <%= f.input :username, 
+                      required: true %>
+          <%= f.input :email,
+                      required: true,
+                      input_html: { autocomplete: "email" } %>
+          <% if !resource.new_record? && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+
+          <%= f.input :description %>
+          <%= f.label :image %>
+          <div class="custom-file mb-3">
+              <% if @user.errors[:image].empty? && @user.image.attached? %>
+                  <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <% end %>
+                  <br/>
+                  <%= image_tag @user.image.variant(:profile), class: "mt-1 mb-2" %>
+              <% end %>
+              <%= f.input :image, as: :file, label: false, input_html: {class: "custom-file-input", id: "file", accept: "image/jpeg, image/png"} %>
+              <label class="custom-file-label" for="file">Choose file</label>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+              <p style="font-weight: bold; margin: auto auto 5px 0px"> Social networks </p>
+              <%= link_to_add_association f, :social_networks, class: "btn btn-sm btn-outline-success", data: {
+                  association_insertion_node: ".social-networks",
+                  association_insertion_method: :append} do %>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+              <% end %>
+          </div>
+          <div class="form-group mb-3">
+              <table class="table table-borderless">
+                  <tbody class="social-networks">
+                      <%= f.simple_fields_for :social_networks do |builder| %>
+                          <%= render "users/social_network_fields", f: builder %>
+                      <% end %>
+                  </tbody>
+              </table>
+          </div>
+          <%= f.input :password,
+                      required: true,
+                      hint: resource.new_record? ? ("#{@minimum_password_length} characters minimum" if @minimum_password_length) : "we need your current password to confirm your changes",
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :current_password,
+                      hint: "we need your current password to confirm your changes",
+                      required: true,
+                      input_html: { autocomplete: "current-password" } if !resource.new_record? %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, resource.new_record? ? "Sign up" : "Update account" , class: "btn btn-success" %>
+        </div>
+      <% end %>
+      <% if resource.new_record? %>
+        <%= render "devise/shared/links" %>
+      <% else %>
+        <h3>Cancel my account</h3>
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
+        <%= link_to "Back", :back %>
+      <% end %>
+    </div>
+  </div>
+</div>

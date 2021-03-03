@@ -22,7 +22,7 @@
             <%= user.first_name + " " + user.last_name %> 
           </td>
           <td class="align-middle"> <%= user.email %> </td>
-          <td class="align-middle"> <%= user.description %> </td>
+          <td class="align-middle"> <%= truncate(user.description, length: 30) %> </td>
           <td class="align-middle"> <%= render "social_networks", social_networks: user.social_networks %> </td>
         </tr>
       <% end %>

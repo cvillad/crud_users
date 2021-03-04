@@ -19,25 +19,26 @@
           <% if !resource.new_record? && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
-
-          <%= f.input :description %>
-          <%= f.label :image %>
-          <% if @user.errors[:image].empty? && @user.image.attached? %>
-            <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger btn-sm" do %>
-              <i class="fa fa-trash-o" aria-hidden="true"></i>
-            <% end %>
-          <% end %>
-          <div class="custom-file mb-3">
-              <% if @user.errors[:image].empty? && @user.image.attached? %>
-                  <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
-                      <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  <% end %>
-                  <br/>
-                  <%= image_tag @user.profile_img, class: "mt-1 mb-2" %>
+          <% if !resource.new_record? %>
+            <%= f.input :description %>
+            <%= f.label :image %>
+            <% if @user.errors[:image].empty? && @user.image.attached? %>
+              <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger btn-sm" do %>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
               <% end %>
-              <%= f.input :image, as: :file, label: false, input_html: {class: "custom-file-input", id: "file", accept: "image/jpeg, image/png"} %>
-              <label class="custom-file-label" for="file">Choose file</label>
-          </div>
+            <% end %>
+            <div class="custom-file mb-3">
+                <% if @user.errors[:image].empty? && @user.image.attached? %>
+                    <%= link_to user_image_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" do %>
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <% end %>
+                    <br/>
+                    <%= image_tag @user.profile_img, class: "mt-1 mb-2" %>
+                <% end %>
+                <%= f.input :image, as: :file, label: false, input_html: {class: "custom-file-input", id: "file", accept: "image/jpeg, image/png"} %>
+                <label class="custom-file-label" for="file">Choose file</label>
+            </div>
+          <% end %>
           <div class="d-flex align-items-center mb-3">
               <p style="font-weight: bold; margin: auto auto 5px 0px"> Social networks </p>
               <%= link_to_add_association f, :social_networks, class: "btn btn-sm btn-outline-success", data: {

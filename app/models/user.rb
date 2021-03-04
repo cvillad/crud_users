@@ -10,7 +10,6 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 25 }
   validates :last_name, presence: true, length: { maximum: 25 }
   validates :username, presence: true, uniqueness: true
-  validates :description, presence: true
 
   def profile_img
     image.variant(resize: "150x150")

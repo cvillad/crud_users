@@ -1,14 +1,16 @@
-<tr class="nested-fields">
+<tr class="nested-fields" data-new-record=<%= f.object.new_record? %>>
   <td> 
       <%= f.input :name, as: :select, collection: ["Facebook", "Twitter", "Instagram", "Linkedin"],
-                         selected: f.object.name, label: false %> 
+                        selected: f.object.name, label: false %> 
   </td>
   <td> 
       <%= f.input :link, label: false, required: true %> 
   </td>
   <td>
-    <%= link_to_remove_association f, class: "btn btn-outline-danger btn-sm" do %>
+    <%= link_to "", data: { action: "nested-form#remove_association" }, class: "btn btn-outline-danger btn-sm" do %>
       <i class="fa fa-trash-o" aria-hidden="true"></i>
     <% end %>
+    <%= f.input :_destroy, as: :hidden %>
   </td>
+  
 </tr>

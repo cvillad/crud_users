@@ -39,22 +39,26 @@
                 <label class="custom-file-label" for="file">Choose file</label>
             </div>
           <% end %>
-          <div class="d-flex align-items-center mb-3">
-              <p style="font-weight: bold; margin: auto auto 5px 0px"> Social networks </p>
-              <%= link_to_add_association f, :social_networks, class: "btn btn-sm btn-outline-success", data: {
-                  association_insertion_node: ".social-networks",
-                  association_insertion_method: :append} do %>
-                  <i class="fa fa-plus" aria-hidden="true"></i>
+          
+          <div class="form-group mb-3" data-controller="nested-form">
+            <p class="d-inline"> Social networks </p>
+            <div class="d-inline" data-nested-form-target="link">
+              <%= link_to "", data: {action: "nested-form#add_association"} ,class: "btn btn-sm btn-outline-success" do %>
+                <i class="fa fa-plus" aria-hidden="true"></i>
               <% end %>
-          </div>
-          <div class="form-group mb-3">
-              <table class="table table-borderless">
-                  <tbody class="social-networks">
-                      <%= f.simple_fields_for :social_networks do |builder| %>
-                          <%= render "social_network_fields", f: builder %>
-                      <% end %>
-                  </tbody>
-              </table>
+            </div>
+            <table class="table table-borderless">
+                <template data-nested-form-target="template">
+                    <%= f.simple_fields_for :social_networks, SocialNetwork.new, child_index: "NEW_RECORD" do |builder| %>
+                        <%= render "social_network_fields", f: builder %>
+                    <% end %>
+                </template>
+                <tbody class="social-networks" data-nested-form-target="form">
+                    <%= f.simple_fields_for :social_networks do |builder| %>
+                        <%= render "social_network_fields", f: builder %>
+                    <% end %>
+                </tbody>
+            </table> 
           </div>
           <%= f.input :password,
                       required: true,

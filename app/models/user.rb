@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :social_networks, dependent: :destroy
-  accepts_nested_attributes_for :social_networks, allow_destroy: true
+  accepts_nested_attributes_for :social_networks, allow_destroy: true, reject_if: :all_blank
   has_one_attached :image, dependent: :destroy 
   validates :image, content_type: ["image/png", "image/jpg", "image/jpeg"]
   validates :first_name, presence: true, length: { maximum: 25 }

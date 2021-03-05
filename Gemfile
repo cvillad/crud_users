@@ -27,7 +27,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'dotenv-rails'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
-gem 'cocoon'
 # Rails 5.2 and Rails 6
 gem 'active_storage_validations'
 
